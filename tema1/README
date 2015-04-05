@@ -1,0 +1,25 @@
+Mangea Liviu Darius 324CA
+
+In send.c dupa ce imi initializez si imi deschid tot ce imi trebuie,
+intru intr-un while(1). Ca metoda de iesire din while am ales sa trimit ultimul
+pachet cu seq_no 0, verificarea facandu-se in functie de lungimea fisierului
+si cat am trimis cu succes pana la un moment dat.
+
+In while se trimite pachetul iar daca timeout-ul pt primirea ack-ului este
+depasit sau ack spune ca nu a fost primit pachetul corect(verificand checksum),
+pachetul este retrimis. Altfel se trimite urmatorul pachet.
+
+In recv.c se asteapta pachetul, iar cand acesta soseste, se verifica prima data
+data daca numarul de secventa asteptat este acelasi cu cel primit. Daca nu este
+se trimite un ack cu numarul de secventa pe care doresc sa il primesc.
+In continuare se verifica daca checksumul din pachet este acelasi cu cel 
+calculat dupa primire. Daca este, se scrie payloadul in fisierul de iesire si se
+trimite ack cu cererea pentru urmatoarea secventa, altfel doar se trimite ack
+pentru a cere sa se retrimita pachetul.
+
+Pentru rulare se da make in link_emulator apoi make in tema1 apoi
+./run_experiment.sh nume_fisier_de_intrare. Eu am unul date.in pe care il las
+aici. Fisierul de iesire va fi date.out.
+
+Imi cer scuze pentru readme-ul cam scurt. Il scriu cu 15 minute inainte de
+deadline.
